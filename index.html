@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buggy Dorker - Google Dork Search Tool</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/index.html" class="logo">
+            <i class="fas fa-search"></i> Buggy Dorking
+        </a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode">
+            <span class="theme-label" id="themeToggleText">Light Mode</span>
+        </button>
+    </nav>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Buggy Dorker</h1>
+            <p>Advanced Dork Search Tool for Bug Bounty Hunters</p>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" id="domainInput" class="domain-input" placeholder="Enter website domain (e.g., example.com)">
+
+            <div class="tab-switcher" role="tablist" aria-label="Dork type selector">
+                <button id="blindTabBtn" class="tab-btn active" data-tab="blindTab" type="button" aria-selected="true" aria-controls="blindTab">
+                    <i class="fas fa-bug"></i> Blind XSS Dorker
+                </button>
+                <button id="filesTabBtn" class="tab-btn" data-tab="filesTab" type="button" aria-selected="false" aria-controls="filesTab">
+                    <i class="fas fa-file-code"></i> Files Dorker
+                </button>
+                <button id="urlTabBtn" class="tab-btn" data-tab="urlTab" type="button" aria-selected="false" aria-controls="urlTab">
+                    <i class="fas fa-link"></i> URL Matcher
+                </button>
+                <button id="githubTabBtn" class="tab-btn" data-tab="githubTab" type="button" aria-selected="false" aria-controls="githubTab">
+                    <i class="fab fa-github"></i> GitHub Dorker
+                </button>
+                <button id="shodanTabBtn" class="tab-btn" data-tab="shodanTab" type="button" aria-selected="false" aria-controls="shodanTab">
+                    <i class="fas fa-search"></i> Shodan Dorker
+                </button>
+                <button id="cmdInjectionTabBtn" class="tab-btn" data-tab="cmdInjectionTab" type="button" aria-selected="false" aria-controls="cmdInjectionTab">
+                    <i class="fas fa-terminal"></i> Command Injection Dorker
+                </button>
+                <button id="rxssTabBtn" class="tab-btn" data-tab="rxssTab" type="button" aria-selected="false" aria-controls="rxssTab">
+                    <i class="fas fa-shield-virus"></i> Reflected XSS Dorker
+                </button>
+            </div>
+
+            <div id="blindTab" class="tab-panel active" role="tabpanel" aria-labelledby="blindTabBtn">
+                <div class="dorks-grid">
+                <div class="dork-card" data-dork="contactForm">
+                    <h3><i class="fas fa-file-alt icon"></i> Contact Us Form</h3>
+                    <p>Finds contact forms with specific file names</p>
+                </div>
+                
+                <div class="dork-card" data-dork="contactPage">
+                    <h3><i class="fas fa-file icon"></i> Contact Us Page</h3>
+                    <p>Finds contact pages with specific URLs</p>
+                </div>
+                
+                <div class="dork-card" data-dork="feedbackForm">
+                    <h3><i class="fas fa-comment-dots icon"></i> Feedback Form</h3>
+                    <p>Finds feedback forms and submission pages</p>
+                </div>
+                
+                <div class="dork-card" data-dork="submitRequest">
+                    <h3><i class="fas fa-paper-plane icon"></i> Submit a Request Page</h3>
+                    <p>Finds pages for submitting requests</p>
+                </div>
+                
+                <div class="dork-card" data-dork="contactSupport">
+                    <h3><i class="fas fa-headset icon"></i> Contact Support</h3>
+                    <p>Finds support contact pages</p>
+                </div>
+                
+                <div class="dork-card" data-dork="submitPages">
+                    <h3><i class="fas fa-upload icon"></i> Submit Pages</h3>
+                    <p>Finds pages for submitting information</p>
+                </div>
+                
+                <div class="dork-card" data-dork="supportCenter">
+                    <h3><i class="fas fa-life-ring icon"></i> Support Center</h3>
+                    <p>Finds support center pages</p>
+                </div>
+                
+                <div class="dork-card" data-dork="submitForms">
+                    <h3><i class="fas fa-clipboard-list icon"></i> Submit Forms</h3>
+                    <p>Finds various submission forms</p>
+                </div>
+                
+                <div class="dork-card" data-dork="requestSubmit">
+                    <h3><i class="fas fa-sync-alt icon"></i> Request a Submit</h3>
+                    <p>Finds pages for submitting requests</p>
+                </div>
+                
+                <div class="dork-card" data-dork="reportPages">
+                    <h3><i class="fas fa-exclamation-triangle icon"></i> Report Pages</h3>
+                    <p>Finds pages for submitting reports</p>
+                </div>
+                
+                <div class="dork-card" data-dork="formPages">
+                    <h3><i class="fas fa-file-contract icon"></i> Form Pages</h3>
+                    <p>Finds pages with specific form text</p>
+                </div>
+                
+                <div class="dork-card" data-dork="requestTypeForms">
+                    <h3><i class="fas fa-file-signature icon"></i> Request Type Forms</h3>
+                    <p>Finds request forms with specific URLs</p>
+                </div>
+                
+                <!-- New Blind XSS Dorks -->
+                <div class="dork-card" data-dork="jobApplication">
+                    <h3><i class="fas fa-briefcase icon"></i> Job Application Forms</h3>
+                    <p>Finds forms for job applications</p>
+                </div>
+                
+                <div class="dork-card" data-dork="newsletterSubscription">
+                    <h3><i class="fas fa-envelope icon"></i> Newsletter Subscription</h3>
+                    <p>Finds newsletter signup forms</p>
+                </div>
+                
+                <div class="dork-card" data-dork="supportTickets">
+                    <h3><i class="fas fa-ticket-alt icon"></i> Support Tickets</h3>
+                    <p>Finds support ticket submission forms</p>
+                </div>
+                
+                <div class="dork-card" data-dork="reportAbuse">
+                    <h3><i class="fas fa-shield-alt icon"></i> Report Abuse</h3>
+                    <p>Finds forms for reporting abuse</p>
+                </div>
+                
+                <div class="dork-card" data-dork="testimonialSubmission">
+                    <h3><i class="fas fa-quote-right icon"></i> Testimonial Submission</h3>
+                    <p>Finds forms for submitting testimonials</p>
+                </div>
+                
+                <div class="dork-card" data-dork="askQuestion">
+                    <h3><i class="fas fa-question-circle icon"></i> Ask a Question</h3>
+                    <p>Finds forms for asking questions</p>
+                </div>
+                
+                <div class="dork-card" data-dork="requestCallback">
+                    <h3><i class="fas fa-phone-alt icon"></i> Request a Callback</h3>
+                    <p>Finds forms for requesting callbacks</p>
+                </div>
+                
+                <div class="dork-card" data-dork="bugReport">
+                    <h3><i class="fas fa-bug icon"></i> Bug Report Forms</h3>
+                    <p>Finds forms for reporting bugs</p>
+                </div>
+                
+                <div class="dork-card" data-dork="suggestionBox">
+                    <h3><i class="fas fa-lightbulb icon"></i> Suggestion Box</h3>
+                    <p>Finds forms for submitting suggestions</p>
+                </div>
+                
+                <div class="dork-card" data-dork="registrationForms">
+                    <h3><i class="fas fa-user-plus icon"></i> Registration Forms</h3>
+                    <p>Finds user registration forms</p>
+                </div>
+                
+                <div class="dork-card" data-dork="quoteRequest">
+                    <h3><i class="fas fa-calculator icon"></i> Quote Request Forms</h3>
+                    <p>Finds forms for requesting quotes</p>
+                </div>
+                
+                <div class="dork-card" data-dork="reviewSubmission">
+                    <h3><i class="fas fa-star icon"></i> Review Submission</h3>
+                    <p>Finds forms for submitting reviews</p>
+                </div>
+                </div>
+            </div>
+
+            <div id="filesTab" class="tab-panel" role="tabpanel" aria-labelledby="filesTabBtn" hidden>
+                <p class="file-instructions">Select one or more file types, optionally set a date range, then launch the Google dork.</p>
+                <div class="date-range" role="group" aria-label="Optional date filters">
+                    <div class="date-control">
+                        <label for="filesAfter">After (optional)</label>
+                        <input type="date" id="filesAfter" name="filesAfter">
+                    </div>
+                    <div class="date-control">
+                        <label for="filesBefore">Before (optional)</label>
+                        <input type="date" id="filesBefore" name="filesBefore">
+                    </div>
+                </div>
+                <div class="file-options" role="group" aria-label="File types">
+                    <label class="file-option">
+                        <input type="checkbox" value="pdf">
+                        <span><i class="fas fa-file-pdf"></i> PDF</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="excel">
+                        <span><i class="fas fa-file-excel"></i> Excel (XLS/XLSX)</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="docx">
+                        <span><i class="fas fa-file-word"></i> Word Docs (DOC/DOCX)</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="env">
+                        <span><i class="fas fa-exclamation-triangle"></i> Environment (.env)</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="csv">
+                        <span><i class="fas fa-table"></i> CSV</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="log">
+                        <span><i class="fas fa-file-alt"></i> Log Files</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="other">
+                        <span><i class="fas fa-user-secret"></i> Other Sensitive</span>
+                    </label>
+                </div>
+                <button type="button" class="file-search-btn">
+                    <i class="fas fa-search"></i> Search Selected Files
+                </button>
+                <p class="file-hint">Pick one or more file types to hunt for exposed documents on the target domain.</p>
+            </div>
+
+            <div id="urlTab" class="tab-panel" role="tabpanel" aria-labelledby="urlTabBtn" hidden>
+                <p class="url-instructions">Add keywords for each operator to build advanced queries. Leave any field blank to skip that operator.</p>
+                <div class="operator-grid">
+                    <div class="operator-input">
+                        <label for="opAllInText">allintext</label>
+                        <input type="text" id="opAllInText" placeholder="keyword1 keyword2">
+                    </div>
+                    <div class="operator-input">
+                        <label for="opInText">intext</label>
+                        <input type="text" id="opInText" placeholder="keyword1 keyword2">
+                    </div>
+                    <div class="operator-input">
+                        <label for="opInUrl">inurl</label>
+                        <input type="text" id="opInUrl" placeholder="login admin">
+                    </div>
+                    <div class="operator-input">
+                        <label for="opAllInUrl">allinurl</label>
+                        <input type="text" id="opAllInUrl" placeholder="secure portal">
+                    </div>
+                    <div class="operator-input">
+                        <label for="opInTitle">intitle</label>
+                        <input type="text" id="opInTitle" placeholder="dashboard">
+                    </div>
+                    <div class="operator-input">
+                        <label for="opAllInTitle">allintitle</label>
+                        <input type="text" id="opAllInTitle" placeholder="admin panel">
+                    </div>
+                    <div class="operator-input">
+                        <label for="opLink">link</label>
+                        <input type="text" id="opLink" placeholder="example.com">
+                    </div>
+                </div>
+                <div class="custom-pattern">
+                    <label for="customUrlPattern">Additional `inurl:` keyword (optional)</label>
+                    <input type="text" id="customUrlPattern" name="customUrlPattern" placeholder="e.g., payment" autocomplete="off">
+                </div>
+                <button type="button" class="file-search-btn url-search-btn">
+                    <i class="fas fa-search"></i> Build URL Dork
+                </button>
+                <p class="file-hint">Mix operators to narrow results. Example: `site:example.com & inurl:login & allintext:"reset password"`.</p>
+                <div class="operator-cheatsheet">
+                    <h4>Google Dork Operators Cheat Sheet</h4>
+                    <dl>
+                        <div>
+                            <dt>allintext</dt>
+                            <dd>Finds pages where all specified keywords appear in the body text.</dd>
+                        </div>
+                        <div>
+                            <dt>intext</dt>
+                            <dd>Locates pages that include any of the keywords within the body content.</dd>
+                        </div>
+                        <div>
+                            <dt>inurl</dt>
+                            <dd>Searches for URLs containing at least one of the provided keywords.</dd>
+                        </div>
+                        <div>
+                            <dt>allinurl</dt>
+                            <dd>Returns URLs that include every keyword listed in the query.</dd>
+                        </div>
+                        <div>
+                            <dt>intitle</dt>
+                            <dd>Targets pages whose titles contain any of the given keywords.</dd>
+                        </div>
+                        <div>
+                            <dt>allintitle</dt>
+                            <dd>Matches pages with titles that include all keywords together.</dd>
+                        </div>
+                        <div>
+                            <dt>link</dt>
+                            <dd>Finds pages that link externally to the specified URL or keyword.</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+
+            <div id="githubTab" class="tab-panel" role="tabpanel" aria-labelledby="githubTabBtn" hidden>
+                <p class="file-instructions">Select presets to search GitHub code for exposed references to the target domain. We include the domain automatically.</p>
+                <div class="file-options" role="group" aria-label="GitHub dork presets">
+                    <label class="file-option">
+                        <input type="checkbox" value="envSecrets">
+                        <span><i class="fas fa-key"></i> .env Secrets</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="apiTokens">
+                        <span><i class="fas fa-fingerprint"></i> API Tokens</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="databaseCreds">
+                        <span><i class="fas fa-database"></i> Database Creds</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="cloudKeys">
+                        <span><i class="fas fa-cloud"></i> Cloud Keys</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="configFiles">
+                        <span><i class="fas fa-cogs"></i> Config Files</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="deployment">
+                        <span><i class="fas fa-ship"></i> Deployment</span>
+                    </label>
+                </div>
+                <button type="button" class="file-search-btn github-search-btn">
+                    <i class="fab fa-github"></i> Search GitHub Code
+                </button>
+                <p class="file-hint">Each preset adds secret-hunting keywords so you can quickly scan GitHub results that mention the domain. Example: "example.com" example.com path:**/.env "SECRET_KEY" "APP_KEY" "DATABASE_URL".</p>
+            </div>
+
+            <div id="shodanTab" class="tab-panel" role="tabpanel" aria-labelledby="shodanTabBtn" hidden>
+                <p class="url-instructions">Build custom Shodan queries using various filters and operators. Leave any field blank to skip that filter. The domain will be automatically added as a hostname filter.</p>
+                <div class="operator-grid">
+                    <div class="operator-input">
+                        <label for="shodanProduct">product</label>
+                        <input type="text" id="shodanProduct" placeholder="nginx Apache IIS">
+                    </div>
+                    <div class="operator-input">
+                        <label for="shodanPort">port</label>
+                        <input type="text" id="shodanPort" placeholder="80 443 22 3389">
+                    </div>
+                    <div class="operator-input">
+                        <label for="shodanCountry">country</label>
+                        <input type="text" id="shodanCountry" placeholder="US GB DE">
+                    </div>
+                    <div class="operator-input">
+                        <label for="shodanCity">city</label>
+                        <input type="text" id="shodanCity" placeholder="London Paris Tokyo">
+                    </div>
+                    <div class="operator-input">
+                        <label for="shodanOrg">org</label>
+                        <input type="text" id="shodanOrg" placeholder="Google Amazon Microsoft">
+                    </div>
+                    <div class="operator-input">
+                        <label for="shodanOs">os</label>
+                        <input type="text" id="shodanOs" placeholder="Windows Linux Ubuntu">
+                    </div>
+                    <div class="operator-input">
+                        <label for="shodanVuln">vuln</label>
+                        <input type="text" id="shodanVuln" placeholder="CVE-2021-44228 CVE-2017-0144">
+                    </div>
+                    <div class="operator-input">
+                        <label for="shodanTitle">title</label>
+                        <input type="text" id="shodanTitle" placeholder="login admin dashboard">
+                    </div>
+                    <div class="operator-input">
+                        <label for="shodanHtml">html</label>
+                        <input type="text" id="shodanHtml" placeholder="password login form">
+                    </div>
+                    <div class="operator-input">
+                        <label for="shodanNet">net</label>
+                        <input type="text" id="shodanNet" placeholder="192.168.1.0/24 10.0.0.0/8">
+                    </div>
+                    <div class="operator-input">
+                        <label for="shodanSsl">ssl</label>
+                        <input type="text" id="shodanSsl" placeholder="expired self-signed">
+                    </div>
+                    <div class="operator-input">
+                        <label for="shodanVersion">version</label>
+                        <input type="text" id="shodanVersion" placeholder="2.4.41 1.18.0">
+                    </div>
+                </div>
+                <div class="custom-pattern">
+                    <label for="customShodanQuery">Additional custom query (optional)</label>
+                    <input type="text" id="customShodanQuery" name="customShodanQuery" placeholder='e.g., "default password" OR "admin:admin"' autocomplete="off">
+                </div>
+                <div class="file-options" role="group" aria-label="Quick Shodan presets">
+                    <label class="file-option">
+                        <input type="checkbox" value="webServers">
+                        <span><i class="fas fa-server"></i> Web Servers</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="databases">
+                        <span><i class="fas fa-database"></i> Databases</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="remoteAccess">
+                        <span><i class="fas fa-desktop"></i> Remote Access</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="iotDevices">
+                        <span><i class="fas fa-wifi"></i> IoT Devices</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="vulnerabilities">
+                        <span><i class="fas fa-shield-alt"></i> Known Vulnerabilities</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="industrialSystems">
+                        <span><i class="fas fa-industry"></i> Industrial Systems</span>
+                    </label>
+                    <label class="file-option">
+                        <input type="checkbox" value="xssFields">
+                        <span><i class="fas fa-shield-virus"></i> XSS Fields</span>
+                    </label>
+                </div>
+                <button type="button" class="file-search-btn shodan-search-btn">
+                    <i class="fas fa-search"></i> Build Shodan Query
+                </button>
+                <p class="file-hint">Mix filters to create precise queries. Example: `hostname:example.com product:"nginx" port:443 country:"US"`.</p>
+                <div class="operator-cheatsheet">
+                    <h4>Shodan Search Filters Cheat Sheet</h4>
+                    <dl>
+                        <div>
+                            <dt>product</dt>
+                            <dd>Search for specific software/services (e.g., nginx, Apache, MySQL).</dd>
+                        </div>
+                        <div>
+                            <dt>port</dt>
+                            <dd>Filter by specific ports (e.g., 80, 443, 22, 3389).</dd>
+                        </div>
+                        <div>
+                            <dt>country</dt>
+                            <dd>Filter by country code (e.g., US, GB, DE, CN).</dd>
+                        </div>
+                        <div>
+                            <dt>city</dt>
+                            <dd>Filter by city name (e.g., London, Paris, Tokyo).</dd>
+                        </div>
+                        <div>
+                            <dt>org</dt>
+                            <dd>Filter by organization name (e.g., Google, Amazon, Microsoft).</dd>
+                        </div>
+                        <div>
+                            <dt>os</dt>
+                            <dd>Filter by operating system (e.g., Windows, Linux, Ubuntu).</dd>
+                        </div>
+                        <div>
+                            <dt>vuln</dt>
+                            <dd>Search for specific vulnerabilities (e.g., CVE-2021-44228).</dd>
+                        </div>
+                        <div>
+                            <dt>title</dt>
+                            <dd>Search in HTTP title tags (e.g., login, admin, dashboard).</dd>
+                        </div>
+                        <div>
+                            <dt>html</dt>
+                            <dd>Search in HTML content (e.g., password, form, login).</dd>
+                        </div>
+                        <div>
+                            <dt>net</dt>
+                            <dd>Search within IP ranges (e.g., 192.168.1.0/24).</dd>
+                        </div>
+                        <div>
+                            <dt>ssl</dt>
+                            <dd>SSL certificate filters (e.g., expired, self-signed).</dd>
+                        </div>
+                        <div>
+                            <dt>version</dt>
+                            <dd>Filter by software version (e.g., 2.4.41, 1.18.0).</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+
+            <div id="cmdInjectionTab" class="tab-panel" role="tabpanel" aria-labelledby="cmdInjectionTabBtn" hidden>
+                <div class="dorks-grid">
+                    <div class="dork-card" data-dork="execFunctions">
+                        <h3><i class="fas fa-terminal icon"></i> Exec Functions</h3>
+                        <p>Finds pages with command execution functions</p>
+                    </div>
+                    
+                    <div class="dork-card" data-dork="systemCalls">
+                        <h3><i class="fas fa-cogs icon"></i> System Calls</h3>
+                        <p>Finds pages with system() function calls</p>
+                    </div>
+                    
+                    <div class="dork-card" data-dork="shellExec">
+                        <h3><i class="fas fa-code icon"></i> Shell Execution</h3>
+                        <p>Finds pages with shell_exec functions</p>
+                    </div>
+                    
+                    <div class="dork-card" data-dork="cmdInjectionParams">
+                        <h3><i class="fas fa-link icon"></i> Command Parameters</h3>
+                        <p>Finds URLs with command injection parameters</p>
+                    </div>
+                    
+                    <div class="dork-card" data-dork="pingUtilities">
+                        <h3><i class="fas fa-wifi icon"></i> Ping Utilities</h3>
+                        <p>Finds ping and network diagnostic tools</p>
+                    </div>
+                    
+                    <div class="dork-card" data-dork="adminTools">
+                        <h3><i class="fas fa-tools icon"></i> Admin Tools</h3>
+                        <p>Finds administrative command tools</p>
+                    </div>
+                    
+                    <div class="dork-card" data-dork="debugPages">
+                        <h3><i class="fas fa-bug icon"></i> Debug Pages</h3>
+                        <p>Finds debug and test pages with command execution</p>
+                    </div>
+                    
+                    <div class="dork-card" data-dork="webShells">
+                        <h3><i class="fas fa-shield-alt icon"></i> Web Shells</h3>
+                        <p>Finds potential web shell interfaces</p>
+                    </div>
+                    
+                    <div class="dork-card" data-dork="fileManagers">
+                        <h3><i class="fas fa-folder-open icon"></i> File Managers</h3>
+                        <p>Finds web-based file management tools</p>
+                    </div>
+                    
+                    <div class="dork-card" data-dork="terminalEmulators">
+                        <h3><i class="fas fa-desktop icon"></i> Terminal Emulators</h3>
+                        <p>Finds web-based terminal interfaces</p>
+                    </div>
+                    
+                    <div class="dork-card" data-dork="configFiles">
+                        <h3><i class="fas fa-file-code icon"></i> Config Files</h3>
+                        <p>Finds configuration files with command paths</p>
+                    </div>
+                    
+                    <div class="dork-card" data-dork="logFiles">
+                        <h3><i class="fas fa-file-alt icon"></i> Log Files</h3>
+                        <p>Finds log files that may contain command traces</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="rxssTab" class="tab-panel" role="tabpanel" aria-labelledby="rxssTabBtn" hidden>
+                <div class="dorks-grid">
+                    <div class="dork-card" data-dork="rxssSearchFields">
+                        <h3><i class="fas fa-search icon"></i> Search Fields</h3>
+                        <p>Find common search inputs likely to reflect</p>
+                    </div>
+                    <div class="dork-card" data-dork="rxssQueryParams">
+                        <h3><i class="fas fa-link icon"></i> Query Parameters</h3>
+                        <p>Find URLs with parameters that often reflect input</p>
+                    </div>
+                    <div class="dork-card" data-dork="rxssErrorReflections">
+                        <h3><i class="fas fa-exclamation-triangle icon"></i> Error Reflections</h3>
+                        <p>Find pages that echo input in error messages</p>
+                    </div>
+                    <div class="dork-card" data-dork="rxssEchoPages">
+                        <h3><i class="fas fa-quote-right icon"></i> Echo Pages</h3>
+                        <p>Find pages that display user-supplied text</p>
+                    </div>
+                    <div class="dork-card" data-dork="rxssRedirectParams">
+                        <h3><i class="fas fa-external-link-alt icon"></i> Redirect Params</h3>
+                        <p>Find URLs with redirection parameters</p>
+                    </div>
+                    <div class="dork-card" data-dork="rxssCommentForms">
+                        <h3><i class="fas fa-comments icon"></i> Comment Forms</h3>
+                        <p>Find comment inputs that may reflect content</p>
+                    </div>
+                    <div class="dork-card" data-dork="rxssFeedbackForms">
+                        <h3><i class="fas fa-comment-dots icon"></i> Feedback Forms</h3>
+                        <p>Find feedback inputs commonly stored or reflected</p>
+                    </div>
+                    <div class="dork-card" data-dork="rxssContactForms">
+                        <h3><i class="fas fa-envelope icon"></i> Contact Forms</h3>
+                        <p>Find contact forms that echo submitted values</p>
+                    </div>
+                    <div class="dork-card" data-dork="rxssSignupForms">
+                        <h3><i class="fas fa-user-plus icon"></i> Signup Forms</h3>
+                        <p>Find registration inputs likely to reflect</p>
+                    </div>
+                    <div class="dork-card" data-dork="rxssAdminPages">
+                        <h3><i class="fas fa-user-shield icon"></i> Admin Pages</h3>
+                        <p>Find admin panels with search or logs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© Mejbankadir Ethical hacker2025 — All rights reserved. Built for bug bounty hunters. Use ethically.</p>
+        
+
+       >
+            <a class="team-card" href="https://github.com/Mejbankadir" target="_blank" title="Developer on GitHub">
+                <i class="fab fa-github"></i>
+                <span>Developer GitHub</span>
+            </a>
+            
+        </div>
+    </div>
+    
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i> <span>Search executed successfully!</span>
+    </div>
+    <script src="./assets/js/main.js" defer></script>
+
+</body></html>
